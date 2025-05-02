@@ -1,0 +1,10 @@
+[package]
+name = "logvolumegenerator"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+config = "0.15.11"
+serde = { version = "1.0.219", features = ["derive"] }
+rand = "0.9.1"
+chrono = "0.4.41"
