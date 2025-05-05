@@ -11,7 +11,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
             config::File::with_name("configuration")
                 .required(false)
         )
-        .add_source(config::Environment::with_prefix("LOGSIM"))
+        .add_source(config::Environment::with_prefix("LOG"))
         .set_default("max_lines_output", 0)?
         .build()?;
     settings.try_deserialize::<Settings>()

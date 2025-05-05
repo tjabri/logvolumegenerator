@@ -1,3 +1,20 @@
+# This is an example configuration file with the required and optional settings.
+# You don't need to provide a configuration file, but it is available for your convenience.
+# All of these parameters can be passed in as environment variables, as described below.
+# If using this file, name it `configuration.toml` and place it in the current directory where the app is running.
+
+# Required setting
+# Environment variable equivalent: LOG_total_output_bytes
 total_output_bytes = 2250000
+
+# Required setting
+# Environment variable equivalent: LOG_total_output_duration_secs
 total_output_duration_secs = 10
-max_lines_output = 0
+
+# Optional setting
+# Environment variable equivalent: LOG_max_lines_output
+# default max_lines_output: 0
+# change this setting if you want to output only N number of log lines at maximum
+# this does not change the output rate, so it's handy for testing purposes
+# this setting overrides the output duration setting, if writing N lines happens before the specified duration
+max_lines_output = 0 # default: 0 (you can omit this setting if the default is desired)

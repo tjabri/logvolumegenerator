@@ -1,8 +1,5 @@
-# Build stage
 FROM rust:slim-bookworm AS builder
 WORKDIR /app
-
-# for caching
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 COPY tests ./
