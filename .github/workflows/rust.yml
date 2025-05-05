@@ -27,6 +27,12 @@ jobs:
       run: make test
     - name: build release
       run: make build-release
+    - name: upload build artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: binary
+        path: target/release/logvolumegenerator
+        retention-days: 1
 
   docker-build-and-push:
     name: docker-build-and-push
@@ -39,6 +45,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: binary
+          path: target/release/logvolumegenerator
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3.4
