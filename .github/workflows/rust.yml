@@ -12,7 +12,9 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+    
   build:
+    name: build
 
     runs-on: ubuntu-latest
 
@@ -24,25 +26,29 @@ jobs:
       run: cargo test --verbose
 
   docker-build-and-push:
-  
-      runs-on: ubuntu-latest
-      
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-  
-        - name: Login to GitHub Container Registry
-          uses: docker/login-action@v3.4
-          with:
-            registry: ${{ env.REGISTRY }}
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-  
-        - name: Build and push Docker image
-          uses: docker/build-push-action@v6.16
-          with:
-            context: .
-            push: true
-            tags: |
-              ${{ env.REGISTRY }}/tjabri/${{ env.IMAGE_NAME }}:latest
-              ${{ env.REGISTRY }}/tjabri/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    name: docker-build-and-push
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3.4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6.16
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
