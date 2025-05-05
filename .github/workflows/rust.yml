@@ -21,6 +21,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       name: Checkout code
+    - name: Cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
     - name: check
       run: make check
     - name: run tests
@@ -45,7 +52,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/
+            ~/target/release
       - name: Download artifact
         uses: actions/download-artifact@v4.3.0
         with:
