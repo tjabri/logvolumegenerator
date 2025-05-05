@@ -7,11 +7,18 @@ use logvolumegenerator::{calculate_iteration_pause, create_log_entry, generate_s
 mod configuration;
 
 fn main() {
+    // set ctrl-c handler
+    ctrlc::set_handler(move || {
+        println!("Caught Ctrl-C... exiting.");
+        std::process::exit(0);
+    }).expect("Error setting Ctrl-C handler");
+    
     // get configuration
     let config = get_configuration().unwrap_or_else(|err| {
         println!("configuration error: {}", err);
         std::process::exit(2);
     });
+    
     
     // generate a string
     let s = generate_sequential_string(80);
