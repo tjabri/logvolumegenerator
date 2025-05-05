@@ -26,7 +26,7 @@ jobs:
     - name: run tests
       run: make test
     - name: build release
-      run: make release
+      run: make build-release
 
   docker-build-and-push:
     name: docker-build-and-push
