@@ -7,8 +7,12 @@ pub struct Settings {
 
 pub fn get_configuration() -> Result<Settings, config::ConfigError> {
     let settings = config::Config::builder()
-        .add_source(config::File::with_name("configuration"))
+        .add_source(
+            config::File::with_name("configuration")
+                .required(false)
+        )
         .add_source(config::Environment::with_prefix("LOGSIM"))
+        .set_default("max_lines_output", 0)?
         .build()?;
     settings.try_deserialize::<Settings>()
 }
