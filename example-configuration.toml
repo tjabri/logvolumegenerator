@@ -4,17 +4,26 @@
 # If using this file, name it `configuration.toml` and place it in the current directory where the app is running.
 
 # Required setting
-# Environment variable equivalent: LOG_total_output_bytes
-total_output_bytes = 2250000
+# Environment variable equivalent: LOG_output_size
+# String representation of a storage size, example: "500MB"
+output_size = "500MB"
 
 # Required setting
-# Environment variable equivalent: LOG_total_output_duration_secs
-total_output_duration_secs = 10
+# Environment variable equivalent: LOG_duration
+# String representation of a duration, example: "10s"
+duration = "10s"
 
 # Optional setting
 # Environment variable equivalent: LOG_max_lines_output
-# default max_lines_output: 0
-# change this setting if you want to output only N number of log lines at maximum
-# this does not change the output rate, so it's handy for testing purposes
-# this setting overrides the output duration setting, if writing N lines happens before the specified duration
+# Default max_lines_output: 0
+# Change this setting if you want to output only N number of log lines at maximum
+# This does not change the output rate, so it's handy for testing purposes
+# This setting overrides the output duration setting, if writing N lines happens before the specified duration
 max_lines_output = 0 # default: 0 (you can omit this setting if the default is desired)
+
+# Optional setting
+# Environment variable equivalent: LOG_output_format
+# Default output_format: "plaintext"
+# Valid options: "plaintext", "json"
+# You do not need to specify this setting if the default is desired
+output_format = "plaintext" # default: "plaintext"
