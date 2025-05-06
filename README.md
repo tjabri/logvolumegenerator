@@ -47,13 +47,13 @@ The binary will be available at `target/release/logvolumegenerator`.
 Generate 10MB of logs over 1 hour:
 
 ```bash
-logvolumegenerator --output-size 10MB --duration 1h
+LOG_output_size=10MB LOG_duration=1h logvolumegenerator
 ```
 
 ### Docker Usage
 
 ```bash
-docker run ghcr.io/tjabri/logvolumegenerator:latest --output-size 10MB --duration 1h
+docker run -e LOG_output_size=10MB -e LOG_duration=1h ghcr.io/tjabri/logvolumegenerator:latest
 ```
 
 ### Configuration Options
@@ -70,13 +70,13 @@ docker run ghcr.io/tjabri/logvolumegenerator:latest --output-size 10MB --duratio
 All configuration options can also be set using environment variables with the `LOG_` prefix:
 
 ```bash
-LOG_OUTPUT_SIZE=10MB LOG_DURATION=1h LOG_OUTPUT_FORMAT=json logvolumegenerator
+LOG_output_size=10MB LOG_duration=1h LOG_output_format=json logvolumegenerator
 ```
 
 With Docker:
 
 ```bash
-docker run -e LOG_OUTPUT_SIZE=10MB -e LOG_DURATION=1h -e LOG_OUTPUT_FORMAT=json ghcr.io/tjabri/logvolumegenerator:latest
+docker run -e LOG_output_size=10MB -e LOG_duration=1h -e LOG_output_format=json ghcr.io/tjabri/logvolumegenerator:latest
 ```
 
 ### Configuration File
@@ -95,25 +95,25 @@ output_format = "json"
 ### Generate 100MB of plaintext logs over 30 minutes
 
 ```bash
-logvolumegenerator --output-size 100MB --duration 30m
+LOG_output_size=100MB LOG_duration=30m logvolumegenerator
 ```
 
 ### Generate 1GB of JSON logs over 2 hours
 
 ```bash
-logvolumegenerator --output-size 1GB --duration 2h --output-format json
+LOG_output_size=1GB LOG_duration=2h LOG_output_format=json logvolumegenerator
 ```
 
 ### Generate logs at 5MB/hour for 4 hours, but limit to 10,000 lines
 
 ```bash
-logvolumegenerator --output-size 20MB --duration 4h --max-lines-output 10000
+LOG_output_size=20MB LOG_duration=4h LOG_max_lines_output=10000 logvolumegenerator 
 ```
 
 ### Using Docker to generate logs and pipe to a file
 
 ```bash
-docker run ghcr.io/tjabri/logvolumegenerator:latest --output-size 50MB --duration 1h > logs.txt
+docker run -e LOG_output_size=50MB -e LOG_duration=1h ghcr.io/tjabri/logvolumegenerator:latest > logs.txt
 ```
 
 ## Use Cases
